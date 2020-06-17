@@ -1,6 +1,7 @@
 {
     "name": "lyz7805/tp-response",
     "description": "适配ThinkPHP6.0的响应类，让响应配置、响应内容更简单、更易用",
+    "keywords": ["thinkphp", "think", "tp", "response", "jump"],
     "license": "MIT",
     "authors": [
         {
