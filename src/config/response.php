@@ -9,6 +9,6 @@ return [
     'default_ajax_return'    => 'json',
 
     // 默认跳转页面对应的模板文件
-    'dispatch_success_tmpl'  => root_path() . 'view' . DIRECTORY_SEPARATOR . 'tpl' . DIRECTORY_SEPARATOR . 'dispatch_jump.tpl',
-    'dispatch_error_tmpl'    => root_path() . 'view' . DIRECTORY_SEPARATOR . 'tpl' . DIRECTORY_SEPARATOR . 'dispatch_jump.tpl',
+    'dispatch_success_tmpl'  => root_path() . 'vendor' . DIRECTORY_SEPARATOR . 'lyz7805' . DIRECTORY_SEPARATOR . 'tp-response' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'dispatch_jump.tpl',
+    'dispatch_error_tmpl'    => root_path() . 'vendor' . DIRECTORY_SEPARATOR . 'lyz7805' . DIRECTORY_SEPARATOR . 'tp-response' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'dispatch_jump.tpl',
 ];
