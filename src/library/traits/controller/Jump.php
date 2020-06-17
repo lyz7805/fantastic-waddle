@@ -112,7 +112,7 @@ trait Jump
      * @return void
      * @throws HttpResponseException
      */
-    protected function result($data, $code = 0, $msg = '', string $type = '', array $header = [])
+    protected function result($data, int $code = 0, $msg = '', string $type = '', array $header = [])
     {
         $result = [
             'code' => $code,
@@ -132,23 +132,30 @@ trait Jump
      * @param string    $url    跳转的 URL 表达式
      * @param int       $code   http code
      * @param array     $with   隐式传参
-     * @param array|int $params 其它 URL 参数，TP6中 \think\Response\Redicrect 已废弃，改为直接将参数合并到$with中，即 $with['params']
+     * @param array     $params 其它 URL 参数，必要性不大，尽量在 $url 参数中直接加入参数
      * @return void
      * @throws HttpResponseException
      */
-    protected function redirect($url, int $code = 302, $with = [], $params = [])
+    protected function redirect($url, int $code = 302, array $with = [], array $params = [])
     {
-        if (is_integer($params)) {
-            $code   = $params;
-            $params = [];
+        if (strpos($url, '://') || (0 === strpos($url, '/') && empty($params)) || (is_object($url) && empty($params))) {
+            $data = $url;
+        } else {
+            if (is_object($url)) {
+                /**
+                 * 如果为Url对象，则更新参数， 此参数会覆盖已经设置的参数
+                 * @var \think\Route\Url
+                 */
+                $data = $url->vars($params);
+            } else {
+                $data = Route::buildUrl($url, $params);
+            }
         }
-        $with['params'] = $params;
 
         /**
          * @var Redirect
          */
-        $response = Response::create($url, 'redirect', $code);
-        // $response->code($code)->params($params)->with($with);    // TP6中 \think\Response\Redicrect->params() 方法已废弃
+        $response = Response::create($data, 'redirect', $code);
         $response->code($code)->with($with);
 
         throw new HttpResponseException($response);
