@@ -1,0 +1,28 @@
+{
+    "name": "lyz7805/tp-response",
+    "description": "适配ThinkPHP6.0的响应类，让响应配置、响应内容更简单、更易用",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "lyz7805",
+            "email": "lyz7805@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "topthink/framework": "^6.0.0",
+        "topthink/think-view": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "lyz7805\\think\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "config": {
+                "response": "src/config/response.php"
+            }
+        }
+    }
+}
