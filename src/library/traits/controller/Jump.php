@@ -138,7 +138,7 @@ trait Jump
      */
     protected function redirect($url, int $code = 302, array $with = [], array $params = [])
     {
-        if (strpos($url, '://') || (0 === strpos($url, '/') && empty($params)) || (is_object($url) && empty($params))) {
+        if ((is_string($url) && (strpos($url, '://') || (0 === strpos($url, '/') && empty($params)))) || (is_object($url) && empty($params))) {
             $data = $url;
         } else {
             if (is_object($url)) {
