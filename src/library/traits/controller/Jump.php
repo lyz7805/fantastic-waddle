@@ -154,7 +154,7 @@ trait Jump
         } else {
             if (is_object($url)) {
                 /**
-                 * 如果为Url对象，则更新参数， 此参数会覆盖已经设置的参数
+                 * 如果为Url对象，则更新参数，此参数会覆盖已经设置的参数
                  * @var \think\Route\Url
                  */
                 $data = $url->vars($params);
