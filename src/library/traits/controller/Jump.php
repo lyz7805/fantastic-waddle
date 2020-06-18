@@ -42,8 +42,8 @@ trait Jump
     {
         if (is_null($url) && !is_null(Request::server('HTTP_REFERER'))) {
             $url = Request::server('HTTP_REFERER');
-        } elseif ('' !== $url && !strpos($url, '://') && 0 !== strpos($url, '/')) {
-            $url = Route::buildUrl($url);
+        } elseif (is_string($url) && '' !== $url && !strpos($url, '://') && 0 !== strpos($url, '/')) {
+            $url = (string) Route::buildUrl($url);
         }
 
         $type = $this->getResponseType();
@@ -51,7 +51,7 @@ trait Jump
             'code' => 1,
             'msg'  => $msg,
             'data' => $data,
-            'url'  => $url,
+            'url'  => (string) $url,
             'wait' => $wait,
         ];
 
@@ -79,8 +79,8 @@ trait Jump
     {
         if (is_null($url)) {
             $url = Request::isAjax() ? '' : 'javascript:history.back(-1);';
-        } elseif ('' !== $url && !strpos($url, '://') && 0 !== strpos($url, '/')) {
-            $url = Route::buildUrl($url);
+        } elseif (is_string($url) && '' !== $url && !strpos($url, '://') && 0 !== strpos($url, '/')) {
+            $url = (string) Route::buildUrl($url);
         }
 
         $type = $this->getResponseType();
@@ -88,7 +88,7 @@ trait Jump
             'code' => 0,
             'msg'  => $msg,
             'data' => $data,
-            'url'  => $url,
+            'url'  => (string) $url,
             'wait' => $wait,
         ];
 
@@ -121,6 +121,17 @@ trait Jump
             'data' => $data,
         ];
         $type     = $type ?: $this->getResponseType();
+
+        // 严格模式下，html类型返回不能为数组
+        if ($type == 'html') {
+            // 返回JSON数据格式到客户端 包含状态信息
+            $result = json_encode($result, JSON_UNESCAPED_UNICODE);
+
+            if (false === $result) {
+                throw new \InvalidArgumentException(json_last_error_msg());
+            }
+        }
+
         $response = Response::create($result, $type)->header($header);
 
         throw new HttpResponseException($response);
