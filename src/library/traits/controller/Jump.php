@@ -56,7 +56,7 @@ trait Jump
         ];
 
         if ('html' == strtolower($type)) {
-            $result = View::fetch(Config::get('view.dispatch_success_tmpl'), $result);
+            $result = View::fetch(Config::get('response.dispatch_success_tmpl', dirname(__FILE__) . '/../../../tpl/dispatch_jump.tpl'), $result);
         }
 
         $response = Response::create($result, $type)->header($header);
@@ -93,7 +93,7 @@ trait Jump
         ];
 
         if ('html' == strtolower($type)) {
-            $result = View::fetch(Config::get('response.dispatch_error_tmpl'), $result);
+            $result = View::fetch(Config::get('response.dispatch_error_tmpl', dirname(__FILE__) . '/../../../tpl/dispatch_jump.tpl'), $result);
         }
 
         $response = Response::create($result, $type)->header($header);

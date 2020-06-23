@@ -1,14 +1,18 @@
 # tp-response
-适配ThinkPHP6.0的响应类，让响应配置、响应内容更简单、更易用
+
+适配 ThinkPHP6.0 的响应类，让响应配置、响应内容更简单、更易用
 
 ## 安装
-~~~php
+
+```php
 composer require lyz7805/tp-response
-~~~
+```
 
 ## 配置
-安装之后会在config目录下生成response.php配置文件
-~~~php
+
+安装之后会在 config 目录下生成 response.php 配置文件
+
+```php
 <?php
 /**
  * 响应输出配置文件
@@ -23,12 +27,14 @@ return [
     'dispatch_success_tmpl'  => root_path() . 'vendor' . DIRECTORY_SEPARATOR . 'lyz7805' . DIRECTORY_SEPARATOR . 'tp-response' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'tpl' . DIRECTORY_SEPARATOR . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => root_path() . 'vendor' . DIRECTORY_SEPARATOR . 'lyz7805' . DIRECTORY_SEPARATOR . 'tp-response' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'tpl' . DIRECTORY_SEPARATOR . 'dispatch_jump.tpl',
 ];
-~~~
+```
 
 ## 使用
-使用trait：
-例如使用Jump跳转类
-~~~php
+
+使用 trait：
+例如使用 Jump 跳转类
+
+```php
 <?php
 declare (strict_types = 1);
 
@@ -47,4 +53,4 @@ class Test extends BaseController
         return $this->success($msg);
     }
 }
-~~~
+```
